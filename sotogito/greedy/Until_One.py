@@ -7,7 +7,7 @@ k : n에서 나누는 수
 2. n에서 k로 나누다.
 """
 
-
+"""
 def until_one(n, k):
     if n % k == 0:
         return n // k
@@ -24,3 +24,10 @@ while True:
     if n == 1:
         print(count)
         break
+"""
+
+n, k = map(int, input().split())
+
+result = 0
+
+# TODO 마저 풀어야됨ㅁ

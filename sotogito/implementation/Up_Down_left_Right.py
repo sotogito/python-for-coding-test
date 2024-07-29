@@ -17,20 +17,25 @@ D : [+1][]
 n = int(input())
 directionList = input().split()
 
+move_types = ['R', 'L', 'U', 'D']
+xMove = [0, 0, -1, +1]
+yMove = [+1, -1, 0, 0]
+
 array = [[0 for _ in range(n)] for _ in range(n)]
 
 userX = 1
 userY = 1
 
 for direction in directionList:
-    if direction == 'R' and userY + 1 <= n:
-        userY += 1
-    elif direction == 'L' and userY - 1 >= 1:
-        userY -= 1
-    elif direction == 'U' and userX - 1 >= 1:
-        userX -= 1
-    elif direction == 'D' and userX + 1 <= n:
-        userX += 1
+    for i in range(len(move_types)):
+        if direction == move_types[i]:
+            resultY = userY + yMove[i]
+            resultX = userX + xMove[i]
 
+    if resultY < 1 or resultY > n or resultX < 1 or resultX > n:
+        continue
+
+    userY = resultY
+    userX = resultX
 
 print(userX, userY)

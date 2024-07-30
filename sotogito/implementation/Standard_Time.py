@@ -19,9 +19,9 @@ standard_number_str = '3'
 
 count = 0
 
-for i in range(n, -1, -1):
-    for j in range(minute, -1, -1):
-        for k in range(second, -1, -1):
+for i in range(n, -1, -1): # range(hour+1)
+    for j in range(minute, -1, -1): #range(60)
+        for k in range(second, -1, -1): #range(60)
             if standard_number_str in str(i) + str(j) + str(k):
                 count += 1
 

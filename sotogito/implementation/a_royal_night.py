@@ -10,10 +10,9 @@
 horizontal = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 vertical = ['1', '2', '3', '4', '5', '6', '7', '8']
 
-steps = [(-2, -1), (-1, -2), (2, -1), (1, -2), (-1, 2), (-2, 1), (1, 2), (2, 1)]
+steps = [(-2, -1), (-1, -2), (2, -1), (1, -2), (-1, 2), (-2, 1), (1, 2), (2, 1)]  #note 데이터의 경우의 수를 미리 정의, 상하좌우 문제와 비슷하다.
 
 input_data = input()
-
 hor = input_data[0]
 ver = input_data[1]
 
@@ -21,11 +20,10 @@ hor_index = horizontal.index(hor)
 ver_index = vertical.index(ver)
 
 count = 0
-
 for step in steps:
     hor_step = hor_index + step[0]
     ver_step = ver_index + step[1]
-    if(hor_step >= 0 and hor_step <= len(horizontal) and ver_step >= 0 and ver_step <= len(vertical)):
+    if (hor_step >= 0 and hor_step <= len(horizontal) and ver_step >= 0 and ver_step <= len(vertical)):
         count += 1
 
 print(count)

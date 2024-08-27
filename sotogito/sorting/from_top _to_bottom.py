@@ -5,8 +5,10 @@ for i in range(n):
     array.append(int(input()))
 
 
+# note 정렬 라이브러리
 # array.sort(reverse=True)
 
+#note 선택 정렬
 for i in range(n):
     min_index = i
     for j in range(i+1, n):

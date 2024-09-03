@@ -17,7 +17,7 @@
 array = [7, 5, 9, 0]
 for i in range(len(array)):
     min_index = i
-    for j in range(i + 1, len(array)):
+    for j in range(i + 1, len(array)): # 가장 작은 숫자를 구하는 for문
         if array[min_index] > array[j]:  # min 보다 더 작은 수인지 확인
             min_index = j
     array[i], array[min_index] = array[min_index], array[i]  # 스와프

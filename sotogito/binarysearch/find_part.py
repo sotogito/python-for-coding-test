@@ -16,7 +16,7 @@ arrayM = sys.stdin.readline().split()
 
 # note 구현
 arrayN.sort()
-arrayM.sort()
+#arrayM.sort() #note 손님 부품 순서는 정렬하면 안됨
 
 # note 이진 탐색 메서드
 def dinart(array, target, start, end):

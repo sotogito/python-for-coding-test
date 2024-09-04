@@ -18,6 +18,7 @@ arrayM = sys.stdin.readline().split()
 arrayN.sort()
 arrayM.sort()
 
+# note 이진 탐색 메서드
 def dinart(array, target, start, end):
     if start > end:
         return None
@@ -32,13 +33,10 @@ def dinart(array, target, start, end):
         return dinart(array, target, mid + 1, end)
 
 
-result_array = []
-
+# note 출력 메서드
 for dataM in arrayM:
     result = dinart(arrayN, dataM, 0, n - 1)
     if result == None:
-        result_array.append("no")
+        print('no', end=' ')
     else:
-        result_array.append("yes")
-
-print(*result_array)
+        print('yes', end=' ')

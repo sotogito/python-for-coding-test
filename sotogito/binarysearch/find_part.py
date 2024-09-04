@@ -13,7 +13,6 @@ arrayN = sys.stdin.readline().split()
 M = int(input())
 arrayM = sys.stdin.readline().split()
 
-
 # note 구현
 arrayN.sort()
 #arrayM.sort() #note 손님 부품 순서는 정렬하면 안됨
@@ -40,3 +39,23 @@ for dataM in arrayM:
         print('no', end=' ')
     else:
         print('yes', end=' ')
+
+
+
+### note set을 활용한 확인
+n = int(input())
+"""
+가게 배열 arrayN을 list가 아닌 set으로 선언하는 이유
+1. set은 해시 테이블 기반으로 구형되어있어 평균 시간 복잡도가 더 빠르다.
+"""
+arrayN = set(map(int, input().split()))
+
+M = int(input())
+arrayM = sys.stdin.readline().split()
+
+# 그냥 set에 들어있는지만 확인하면 됨
+for i in arrayM:
+    if i in arrayN:
+        print('yes', end=' ')
+    else:
+        print('no', end=' ')

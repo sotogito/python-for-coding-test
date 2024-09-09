@@ -22,14 +22,14 @@ while True:
 
     elif result % 3 == 0:
         keep = result // 3
-        if keep % 5 == 0:
+        if keep % 5 == 0 or keep == 1:
             result = result // 3
             count += 1
             continue
 
     elif result % 2 == 0:
         keep = result // 2
-        if keep % 5 == 0 :
+        if keep % 5 == 0  or keep == 1 :
             result = result // 2
             count += 1
             continue

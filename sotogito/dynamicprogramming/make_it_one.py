@@ -1,45 +1,92 @@
 """
-1. 5로 나누어 떨어지면, 5로 나눈다.
-2. 3''
-3. 2''
-4. 1을 뺀다.
+dp[1] = 0
+그냥 dp 빼고 쭉 적어보자면
 
-최소한의 연산 횟수
+2. 2로 나눌 수 있으므로 나눔 = 1
+3. 3으로 나눌 수 있으르모 나눔 = 1
+4. 2로 나눌 수 있으므로 2 + dp[2] 재사용 = 2
+5. 5로 나눌 수 있으므로 나눔 = 1
+6. 크게 3가지의 경우가 있다
+    - 1뺴고, dp[5]
+    - 2나누고 ,. dp[3]
+    - 3나누고, dp[2]
+
+쭉! 적으면 크게 4가지로 나뉜다.
+- 2로 나눌 수있으면 나누고 dp[나눈값]
+- 3으로 나눌 수 있으면 나누고 dp[나눈값]
+- 5로 나눌 수 있으면 나누고 dp[나눈값]
+- 1을 뺀 값과 이전의 dp값
+
+총 4가지를 계산해보고 비교한다.
+각 단계에서는 두가지의 경우를 비교해야된다.
+1. 저장된 dp[] - 아마도 현재 가장 최소값
+2. 해당 숫자로 나눴을때 dp[]+1
+더 작은 숫자가 들어간다.
+
+
+예를들어보자
+
+dp[6]은 2로 나눠지고 3으로 나눠진다
+
+먼저 1을 뺴고 dp[6-1] 을 가져와 비교한다.
+그럼 dp[6]은 당장 2이다
+
+6은 2화 3으로 나눠진다.
+- 2의 로직에서
+    - dp[6] = 현재 2
+    - dp[6//2]+1 = 2로 한번 나누고 dp[3]을 재사용 = 2
+=> 최소값 2
+
+- 3의 로직
+    - 최소값 2
+    - dp[6//3]+1 = 3로 한번 나누고 dp[2]을 재사용 = 2
+=> 최소값 2
+
+
+min(dp[i], dp[i//n]+1)에서
+dp[i] 는 지금 당장의 저장된 최소값을 말한다.
+ dp[i//n]+1은 약간의 식 변형을 해보자면
+ +1은  dp[i//n]만의 식 i//n행위 횟수를 나낸다.
+ 그리고 dp[i//n] 안은 그의 몫이다.
+
+  dp[n을 나눈 값] + i//n
+
+
+이렇게 풀면 나중에 나누어지는 n값이 있어도 결국은 최소값만 저장되게된다.
 """
 
 x = int(input())
 
-count = 0
-result = x
-while True:
-    if result == 1:
-        break
+dp = [0] * 3001
 
-    if result % 5 == 0:
-        result = result // 5
-        count += 1
-        continue
+# 1은 0번이므로 고려하지 않음(어차피 0으로 초기화 됨)
+for i in range(2, x+1):
+    dp[i] = dp[i-1] + 1
 
-    elif result % 3 == 0:
-        keep = result // 3
-        if keep % 5 == 0 or keep == 1:
-            result = result // 3
-            count += 1
-            continue
+    # 2로 나누는 경우와 비교
+    if i % 2 == 0:
+        dp[i] = min(dp[i], dp[i // 2] + 1) # 최소값 vs 2로 나눈 후 dp[나눈값]
 
-    elif result % 2 == 0:
-        keep = result // 2
-        if keep % 5 == 0  or keep == 1 :
-            result = result // 2
-            count += 1
-            continue
+    # 3으로 나누는 경우와 비교
+    if i % 3 == 0:
+        dp[i] = min(dp[i], dp[i // 3] + 1)
 
+        # 5로 나누는 경우와 비교
+    if i % 5 == 0:
+        dp[i] = min(dp[i], dp[i // 5] + 1)
 
-    result -= 1
-    count += 1
+print(dp[x])
+"""
+???????근데 왜 독립력인 if문으로 구현해야 될끼?
 
+만약 2,3,5를 고려할때를 else-if문으로 작성할경우
+2와5가 가능한 경우
+상위 if문에 있는 2를 고려하고 if문을 나가버린다.
+그럼 5가 최소값이라고 고려되지 않느다.
 
-print(count)
+즉, 1을 뺏을때, 2,3,5로 나눌떄 모든 경우의 수에서 다 고려되어서 비교되어져야하기 떄문에 각각 독립적인 if문으로 작성해야한다. 
+
+"""
 
 """
 구현 설명
@@ -92,5 +139,43 @@ print(count)
 
 사실 2번 로직에서 3으로 나눠주고 끝나야한다.
 그래서 2,3을 나눌때 1이 되는지 추가로 확인해주었다ㅏ
+
+"""
+
+"""
+내 로직
+x = int(input())
+
+count = 0
+result = x
+while True:
+    if result == 1:
+        break
+
+    if result % 5 == 0:
+        result = result // 5
+        count += 1
+        continue
+
+    elif result % 3 == 0:
+        keep = result // 3
+        if keep % 5 == 0 or keep == 1:
+            result = result // 3
+            count += 1
+            continue
+
+    elif result % 2 == 0:
+        keep = result // 2
+        if keep % 5 == 0  or keep == 1 :
+            result = result // 2
+            count += 1
+            continue
+
+
+    result -= 1
+    count += 1
+
+
+print(count)
 
 """
